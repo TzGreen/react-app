@@ -1,0 +1,40 @@
+.post-item {
+  width: 200px;
+  height: 100%;
+  margin: 5px;
+  --bg-color: var(--purple-2);
+  background-color: var(--bg-color);
+  
+  &:nth-child(3n) {
+    --bg-color: var(--purple-1);
+  }
+
+  &:nth-child(3n+1) {
+    --bg-color: var(--blue);
+  }
+
+  // &:nth-child(4n+2) {
+  //   --bg-color: var(--purple-1);
+  // }
+
+  &:nth-child(3n+2) {
+    --bg-color: var(--gs-6);
+  }
+
+  &:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &__title {
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid var(--main-color-2);
+    color: var(--main-color-2);
+  }
+
+  &__body {
+    padding: 20px;
+    background-color: var(--gs-1);
+    height: 100%;
+  }
+}

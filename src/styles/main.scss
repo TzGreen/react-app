@@ -135,6 +135,10 @@ body {
   flex-direction: column;
 }
 
+.fww {
+  flex-wrap: wrap;
+}
+
 .centered,
 .aic,
 .aifs,
@@ -144,8 +148,31 @@ body {
 .jcfs,
 .jcsb,
 .direction-column,
+.fww,
 .df {
   display: flex;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.main {
+  position: relative;
+  background-color: var(--gs-3);
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+
+  &__container {
+    margin-left: 220px;
+    padding: 50px 70px;
+    width: 100%;
+    min-height: 100vh;
+  }
 }
 
 // Base
@@ -155,6 +182,10 @@ body {
 // // Components
 
 @import "./components/toast";
+
+@import "./components/sidebar";
+
+@import "./components/post-item";
 
 // // Sections
 

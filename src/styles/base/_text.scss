@@ -1,21 +1,17 @@
-.ta-center {
+.text-center {
   text-align: center;
 }
 
-.ta-end {
+.text-end {
   text-align: end;
 }
 
-.tt-uppercase {
+.uppercase {
   text-transform: uppercase;
 }
 
-.fw-medium {
+.text-medium {
   font-weight: 500;
-}
-
-.fw-semi-bold {
-  font-weight: 600;
 }
 
 .h1,
@@ -25,14 +21,13 @@
 .c1,
 .c2,
 .c3 {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .h1,
 .h2,
 .h3,
 .h4 {
-  font-weight: 600;
   line-height: 30px;
 }
 
@@ -87,4 +82,12 @@
 
 .p4 {
   font-size: 12px;
+}
+
+.text-on-dark {
+  color: var(--text-on-dark);
+}
+
+.text-on-light {
+  color: var(--text-on-light);
 }

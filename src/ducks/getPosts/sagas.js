@@ -2,21 +2,17 @@
 
 import { API } from 'aws-amplify'
 // import axios from 'axios'
-import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest } from 'redux-saga/effects'
 import { Saga } from 'react-redux'
 import {
-  getUsersFailure,
-  getUsersRequest,
-  getUsersSuccess,
-  getUsersTrigger,
+  getPostsFailure,
+  getPostsRequest,
+  getPostsSuccess,
+  getPostsTrigger,
 } from './actions'
-import { getUsersStateSelector } from './selectors'
 
-function* getUsersSaga(): Saga {
-  const getUsersState = yield select(getUsersStateSelector)
-  if (getUsersState.data) return
-
-  yield put(getUsersRequest())
+function* getPostsSaga({ payload }): Saga {
+  yield put(getPostsRequest())
 
   //   const apiURL = 'https://jsonplaceholder.typicode.com'
   const apiName = 'jsonplaceholder'
@@ -33,7 +29,7 @@ function* getUsersSaga(): Saga {
       //   axios,
       //   options
       apiName,
-      '/users',
+      `/posts?userId=${payload}`,
       {
         headers: {},
         body: {},
@@ -41,14 +37,14 @@ function* getUsersSaga(): Saga {
     )
 
     // if (res && res.data) {
-    yield put(getUsersSuccess(usersList))
+    yield put(getPostsSuccess({ userId: payload, data: usersList }))
 
     // to support sign in in all windows
   } catch (error) {
-    yield put(getUsersFailure(error))
+    yield put(getPostsFailure(error))
   }
 }
 
-export function* watchGetUsers(): Saga {
-  yield takeLatest(getUsersTrigger.toString(), getUsersSaga)
+export function* watchGetPosts(): Saga {
+  yield takeLatest(getPostsTrigger.toString(), getPostsSaga)
 }
