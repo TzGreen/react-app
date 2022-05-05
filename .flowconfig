@@ -1,0 +1,28 @@
+[ignore]
+<PROJECT_ROOT>/test/**/*
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+module.name_mapper='server' -> '<PROJECT_ROOT>/server'
+module.name_mapper='pageTypes' -> '<PROJECT_ROOT>/pageTypes'
+module.name_mapper='store' -> '<PROJECT_ROOT>/src/redux/store.js'
+module.name_mapper='ducks' -> '<PROJECT_ROOT>/src/ducks'
+module.name_mapper='styles' -> '<PROJECT_ROOT>/src/styles'
+module.name_mapper='pages' -> '<PROJECT_ROOT>/src/pages'
+module.name_mapper='config' -> '<PROJECT_ROOT>/src/config.js'
+module.name_mapper='utils' -> '<PROJECT_ROOT>/src/utils'
+module.name_mapper='views' -> '<PROJECT_ROOT>/src/views'
+module.name_mapper='components' -> '<PROJECT_ROOT>/src/views/components'
+module.name_mapper='sections' -> '<PROJECT_ROOT>/src/views/sections'
+module.name_mapper='icons' -> '<PROJECT_ROOT>/src/views/icons'
+esproposal.optional_chaining=enable
+
+[strict]
+
+[declarations]
+<PROJECT_ROOT>/node_modules/.*

@@ -1,0 +1,24 @@
+
+{
+  "extends": "@lanp/eslint-config",
+  "settings": {
+    "import/resolver": {
+      "alias": [
+        ["pageTypes", "./src/pageTypes"],
+        ["styles", "./src/styles"],
+        ["pages", "./src/pages"],
+        ["test", "./src/test"],
+        ["config", "./src/config"],
+        ["server", "./server"],
+        ["ducks", "./src/ducks"],
+        ["redux", "./src/redux"],
+        ["utils", "./src/utils"],
+        ["store", "./src/redux/store"],
+        ["views", "./src/views"],
+        ["components", "./src/views/components"],
+        ["sections", "./src/views/sections"],
+        ["icons", "./src/views/icons"]
+      ]
+    }
+  }
+}

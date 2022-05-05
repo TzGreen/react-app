@@ -1,0 +1,24 @@
+{
+    // Makes ESlint extension format code on save
+    // "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+  
+    // Disable VSCode built-in validation
+    "javascript.validate.enable": false,
+    "typescript.validate.enable": false,
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+  
+    // Disabling Prettier formatting with VSCode extension because it'll be handled by ESlint and it's built-in Prettier plugin
+    "prettier.disableLanguages": ["javascript", "javascriptreact", "scss"],
+  
+    // Eslint-related rules
+    "eslint.enable": true,
+    "eslint.alwaysShowStatus": true,
+    "eslint.options": {
+      "configFile": ".eslintrc"
+    }
+  }
