@@ -62,8 +62,21 @@
   }
 
   &_primary[fill] {
-    fill: var(--main-color-1);
+    fill: var(--gs-9);
   }
+
+  &_primary[stroke] {
+    stroke: var(--gs-9);
+  }
+
+  &_white[fill] {
+    fill: var(--gs-1);
+  }
+
+  &_white[stroke] {
+    stroke: var(--gs-1);
+  }
+
 
   &_error[fill] {
     fill: var(--red-4);
@@ -79,10 +92,6 @@
 
   &_secondary[stroke] {
     stroke: var(--gs-7);
-  }
-
-  &_primary[stroke] {
-    stroke: var(--main-color-1);
   }
 
   &_error[stroke] {

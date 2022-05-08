@@ -4,6 +4,7 @@ import Amplify, { API } from 'aws-amplify'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import { apiName, apiURL } from 'config'
 import { configureStore } from './redux/store'
 import Root from './app/Root'
 import './styles/main.scss'
@@ -14,8 +15,8 @@ Amplify.configure({
   API: {
     endpoints: [
       {
-        name: 'jsonplaceholder',
-        endpoint: 'https://jsonplaceholder.typicode.com',
+        name: apiName,
+        endpoint: apiURL,
       },
     ],
   },

@@ -10,6 +10,7 @@ const getBaseURL = () => {
 
 const baseURL = nodeEnv === 'test' ? developmentURL : getBaseURL()
 
-const apiURL = `${baseURL}`
+const apiURL = 'https://jsonplaceholder.typicode.com'
+const apiName = 'jsonplaceholder'
 
-export { baseURL, apiURL }
+export { baseURL, apiURL, apiName }

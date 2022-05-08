@@ -179,6 +179,8 @@ body {
 
 @import "./base/icons";
 
+@import "./base/spacing";
+
 // // Components
 
 @import "./components/toast";
@@ -186,6 +188,14 @@ body {
 @import "./components/sidebar";
 
 @import "./components/post-item";
+
+@import "./components/modal";
+
+@import "./components/input";
+
+@import "./components/textarea";
+
+@import "./components/button";
 
 // // Sections
 

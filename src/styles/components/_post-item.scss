@@ -36,5 +36,19 @@
     padding: 20px;
     background-color: var(--gs-1);
     height: 100%;
+    width: 100%;
+  }
+
+  &__btn {
+    min-width: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+    padding: 0;
+    margin-left: 10px;
+    margin-bottom: 10px;
+
+    .icon-frame {
+      margin: 0;
+    }
   }
 }

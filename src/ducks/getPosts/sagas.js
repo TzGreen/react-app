@@ -1,7 +1,7 @@
 // @flow
 
 import { API } from 'aws-amplify'
-// import axios from 'axios'
+import { apiName } from 'config'
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { Saga } from 'react-redux'
 import {
@@ -14,20 +14,9 @@ import {
 function* getPostsSaga({ payload }): Saga {
   yield put(getPostsRequest())
 
-  //   const apiURL = 'https://jsonplaceholder.typicode.com'
-  const apiName = 'jsonplaceholder'
-
   try {
-    // const options = {
-    //   method: 'get',
-    //   url: `${apiURL}/users`,
-    //   data: {},
-    // }
-
-    const usersList = yield call(
+    const postsList = yield call(
       [API, 'get'],
-      //   axios,
-      //   options
       apiName,
       `/posts?userId=${payload}`,
       {
@@ -36,10 +25,7 @@ function* getPostsSaga({ payload }): Saga {
       }
     )
 
-    // if (res && res.data) {
-    yield put(getPostsSuccess({ userId: payload, data: usersList }))
-
-    // to support sign in in all windows
+    yield put(getPostsSuccess({ userId: payload, data: postsList }))
   } catch (error) {
     yield put(getPostsFailure(error))
   }

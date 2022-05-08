@@ -1,0 +1,131 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  min-width: 60px;
+  height: 34px;
+  color: var(--gs-1);
+  font-weight: 500;
+  font-size: 12px;
+  font-family: "Roboto", sans-serif;
+  line-height: 20px;
+  text-decoration: none;
+  background-color: var(--main-color-2);
+  border: unset;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: all .15s linear;
+
+  &:not(:disabled):not(&_disabled):not(&_text):not(&_outline):hover {
+    background-color: var(--main-color-1);
+  }
+
+  &:not(:disabled):not(&_disabled):not(&_text):not(&_outline):active {
+    background-color: var(--main-color-3);
+  }
+
+  &:disabled {
+    color: var(--gs-9);
+    background-color: var(--gs-2);
+    border: unset;
+    cursor: not-allowed;
+  }
+
+  &__icon {
+    margin-right: 6px;
+  }
+
+  &_height_lg {
+    height: 40px;
+  }
+
+  &_xs {
+    width: 100px;
+  }
+
+  &_sm {
+    width: 120px;
+  }
+
+  &_md {
+    width: 150px;
+  }
+
+  &_lg {
+    width: 300px;
+  }
+
+  &_auto {
+    width: 100%;
+  }
+
+  &_outline {
+    color: var(--main-color-2);
+    background-color: var(--gs-1);
+    border: 1px solid var(--main-color-2);
+
+    &:not(:disabled):not(.btn_disabled):hover {
+      color: var(--main-color-1);
+      border-color: var(--main-color-1);
+      background-color: var(--gs-1);
+      opacity: 0.8;
+    }
+
+    &:not(:disabled):not(.btn_disabled):active {
+      color: var(--main-color-3);
+      border-color: var(--main-color-3);
+      background-color: var(--gs-1);
+    }
+  }
+
+  &_disabled {
+    color: var(--gs-9);
+    background-color: var(--gs-2);
+    border: unset;
+    cursor: not-allowed;
+  }
+
+  &_social {
+    height: 40px;
+    color: var(--gs-9);
+    background-color: var(--gs-2);
+
+    &:not(:disabled):not(.btn_disabled):not(.btn_text):hover {
+      background-color: var(--gs-3);
+    }
+  
+    &:not(:disabled):not(.btn_disabled):not(.btn_text):active {
+      background-color: var(--gs-3);
+    }
+  }
+
+  &_text {
+    width: auto;
+    min-width: auto;
+    height: auto;
+    color: var(--gs-9);
+    background: transparent;
+
+    &:hover {
+      color: var(--main-color-2);
+    }
+
+    &:hover svg[fill] {
+      transition: all .15s linear;
+      fill: var(--main-color-2);
+    }
+
+    &:hover svg[stroke] {
+      transition: all .15s linear;
+      stroke: var(--main-color-2);
+    }
+  }
+}
+
+.pure-btn {
+  background-color: transparent;
+  border: unset;
+  outline: none;
+}

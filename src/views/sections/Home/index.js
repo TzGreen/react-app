@@ -20,19 +20,21 @@ const Home = () => {
   if (getUsersState.error || !getUsersState.data) return <NotFoundSection />
 
   return (
-    <section className="direction-column users-table">
-      <div className="jcsb aic users-table__header c1 text-medium">
-        <div className="users-table__name">Name</div>
-        <div className="users-table__email text-center">Email</div>
-        <div className="users-table__company text-center">Company</div>
-        <div className="users-table__options" />
-      </div>
-      <div>
-        {getUsersState.data.map((user) => (
-          <UserItem user={user} key={user.id} />
-        ))}
-      </div>
-    </section>
+    <>
+      <section className="direction-column users-table">
+        <div className="jcsb aic users-table__header c1 text-medium">
+          <div className="users-table__name">Name</div>
+          <div className="users-table__email text-center">Email</div>
+          <div className="users-table__company text-center">Company</div>
+          <div className="users-table__options" />
+        </div>
+        <div>
+          {getUsersState.data.map((user) => (
+            <UserItem user={user} key={user.id} />
+          ))}
+        </div>
+      </section>
+    </>
   )
 }
 

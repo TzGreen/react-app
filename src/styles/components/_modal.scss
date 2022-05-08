@@ -1,0 +1,42 @@
+.modal {
+  z-index: 100;
+  width: 100%;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &__container {
+    background-color: var(--gs-1);
+    width: 300px;
+    border-radius: 8px;
+    padding: 20px 30px 30px;
+
+    &_md {
+      width: 350px;
+    }
+
+    &_lg {
+      width: 500px;
+    }
+
+    &_auto {
+      width: auto;
+    }
+  }
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__close-btn {
+    margin: 6px 0 auto auto;
+  }
+}
+
+.post-modal {
+
+  &__submit-btn {
+    margin-left: 20px;
+  }
+}
