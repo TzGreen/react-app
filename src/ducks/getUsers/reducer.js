@@ -1,5 +1,6 @@
 // @flow
 
+import { addUserSuccess } from 'ducks/addUser/actions'
 import { handleActions } from 'redux-actions'
 import { getUsersFailure, getUsersRequest, getUsersSuccess } from './actions'
 
@@ -26,6 +27,11 @@ const getUsersReducer = handleActions(
     [getUsersSuccess]: (state: State, action) => ({
       loading: false,
       data: action.payload,
+    }),
+
+    [addUserSuccess]: (state: State, action) => ({
+      ...state,
+      data: [...state.data, action.payload],
     }),
   },
   initialState

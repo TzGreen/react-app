@@ -11,7 +11,7 @@ import {
   getPostsTrigger,
 } from './actions'
 
-function* getPostsSaga({ payload }): Saga {
+function* getPostsSaga({ payload }: string): Saga {
   yield put(getPostsRequest())
 
   try {

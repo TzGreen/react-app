@@ -34,7 +34,7 @@ const getPostsReducer = handleActions(
     }),
 
     [addPostSuccess]: (state: State, action) => {
-      const { userId, id, ...newPost } = action.payload
+      const { userId, ...newPost } = action.payload
       if (userId === state.userId) {
         return {
           ...state,

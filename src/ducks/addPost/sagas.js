@@ -10,8 +10,9 @@ import {
   addPostSuccess,
   addPostTrigger,
 } from './actions'
+import type { AddPostPayload } from './types'
 
-function* addPostSaga({ payload }): Saga {
+function* addPostSaga({ payload }: AddPostPayload): Saga {
   yield put(addPostRequest())
 
   try {
