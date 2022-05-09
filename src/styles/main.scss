@@ -195,8 +195,12 @@ body {
 
 @import "./components/textarea";
 
+@import "./components/search-bar";
+
 @import "./components/button";
 
 // // Sections
 
 @import "./sections/home";
+
+@import "./sections/user";
