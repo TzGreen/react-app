@@ -4,8 +4,9 @@ import React from 'react'
 import classNames from 'classnames'
 import { Props } from './types'
 
-export const Plus = ({ intent = '', hovered = false, className }: Props) => {
+export const Search = ({ intent = '', hovered = false, className }: Props) => {
   const iconClassName = classNames(className, 'icon', {
+    // icon_primary: intent === '',
     icon_white: intent === 'white',
     icon_hovered: hovered,
   })
@@ -20,7 +21,7 @@ export const Plus = ({ intent = '', hovered = false, className }: Props) => {
       className={iconClassName}
     >
       <path d="M0 0h24v24H0V0z" fill="none" />
-      <path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z" />
+      <path d="M15.5 14h-.79l-.28-.27c1.2-1.4 1.82-3.31 1.48-5.34-.47-2.78-2.79-5-5.59-5.34-4.23-.52-7.79 3.04-7.27 7.27.34 2.8 2.56 5.12 5.34 5.59 2.03.34 3.94-.28 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
     </svg>
   )
 }

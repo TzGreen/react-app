@@ -2,6 +2,7 @@
 
 import React from 'react'
 import classNames from 'classnames'
+import { Props } from './types'
 
 export const Edit = ({
   intent = '',

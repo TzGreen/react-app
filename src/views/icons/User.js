@@ -4,8 +4,9 @@ import React from 'react'
 import classNames from 'classnames'
 import { Props } from './types'
 
-export const Menu = ({ hovered = false, className }: Props) => {
+export const User = ({ intent = '', hovered = false, className }: Props) => {
   const iconClassName = classNames(className, 'icon', {
+    icon_white: intent === '',
     icon_hovered: hovered,
   })
 
@@ -19,7 +20,7 @@ export const Menu = ({ hovered = false, className }: Props) => {
       className={iconClassName}
     >
       <path d="M0 0h24v24H0V0z" fill="none" />
-      <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />{' '}
+      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z" />
     </svg>
   )
 }
