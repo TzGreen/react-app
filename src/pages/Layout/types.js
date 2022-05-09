@@ -1,7 +1,7 @@
 // @flow
 
-import type { Node } from 'react'
+import type { ReactNode } from 'react'
 
 export type Props = {
-  children?: Node,
+  children?: ReactNode,
 }

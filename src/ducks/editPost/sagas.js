@@ -11,7 +11,9 @@ import {
   editPostTrigger,
 } from './actions'
 
-function* editPostSaga({ payload }): Saga {
+import type { EditPostPayload } from './types'
+
+function* editPostSaga({ payload }: EditPostPayload): Saga {
   yield put(editPostRequest())
 
   try {

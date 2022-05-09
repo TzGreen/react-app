@@ -11,7 +11,9 @@ import {
   deletePostTrigger,
 } from './actions'
 
-function* deletePostSaga({ payload }): Saga {
+import type { DeletePostPayload } from './types'
+
+function* deletePostSaga({ payload }: DeletePostPayload): Saga {
   yield put(deletePostRequest())
 
   try {

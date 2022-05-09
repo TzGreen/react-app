@@ -9,7 +9,7 @@ export const {
   getPostsFailure,
   getPostsSuccess,
 } = createActions({
-  GET_POSTS_TRIGGER: (userId: string) => userId,
+  GET_POSTS_TRIGGER: (userId: number) => userId,
   GET_POSTS_REQUEST: undefined,
   GET_POSTS_FAILURE: (error: string) => error,
   GET_POSTS_SUCCESS: (data: Array<Post>) => data,
