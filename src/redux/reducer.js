@@ -3,6 +3,9 @@ import { combineReducers } from 'redux'
 import getUsersReducer from 'ducks/getUsers/reducer'
 import { moduleName as getUsersModule } from 'ducks/getUsers/selectors'
 
+import addUserReducer from 'ducks/addUser/reducer'
+import { moduleName as addUserModule } from 'ducks/addUser/selectors'
+
 import getPostsReducer from 'ducks/getPosts/reducer'
 import { moduleName as getPostsModule } from 'ducks/getPosts/selectors'
 
@@ -17,6 +20,7 @@ import { moduleName as deletePostModule } from 'ducks/deletePost/selectors'
 
 export default combineReducers({
   [getUsersModule]: getUsersReducer,
+  [addUserModule]: addUserReducer,
   [getPostsModule]: getPostsReducer,
   [addPostModule]: addPostReducer,
   [editPostModule]: editPostReducer,
