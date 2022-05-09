@@ -15,6 +15,7 @@ import { Plus } from 'views/icons/Plus'
 import { addPostModalTrigger, addPostTrigger } from 'ducks/addPost/actions'
 import { addPostStateSelector } from 'ducks/addPost/selectors'
 import AddPostModal from 'views/components/AddPostModal'
+import { EmptyData } from 'views/icons/EmptyData'
 
 const User = () => {
   const dispatch = useDispatch()
@@ -55,6 +56,22 @@ const User = () => {
   )
     return <NotFoundSection />
 
+  const userName = getUsersState.data.find(
+    (user) => user.id === Number(userId)
+  )?.name
+
+  const renderedEmptyData = (
+    <div className="direction-column aic jcc full-width user__empty-data">
+      <EmptyData />
+      <span className="h4 user__empty-data_text">
+        No posts added yet. Create your first post here.
+      </span>
+      <Button icon={<Plus intent="white" />} onClick={openAddPostModalTrigger}>
+        Add new post
+      </Button>
+    </div>
+  )
+
   return (
     <>
       <AddPostModal
@@ -64,13 +81,9 @@ const User = () => {
         onClose={closeAddPostModalTrigger}
       />
       <section className="fww">
-        <div className="c1 aic jcsb full-width bottom-16">
+        <div className="h3 aic jcsb full-width bottom-16">
           <span className="text-medium">
-            User&nbsp;
-            {
-              getUsersState.data.find((user) => user.id === Number(userId))
-                ?.name
-            }
+            {userName?.split(' ')[0] || userName}&apos;s posts
           </span>
           <Button
             icon={<Plus intent="white" />}
@@ -79,9 +92,11 @@ const User = () => {
             Add new post
           </Button>
         </div>
-        {getPostsState.data.map((post) => (
-          <PostItem userId={Number(userId)} post={post} key={post.id} />
-        ))}
+        {(getPostsState.data?.length &&
+          getPostsState.data.map((post) => (
+            <PostItem userId={Number(userId)} post={post} key={post.id} />
+          ))) ||
+          renderedEmptyData}
       </section>
     </>
   )
