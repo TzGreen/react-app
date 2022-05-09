@@ -1,14 +1,16 @@
 // @flow
 
-import type { Crypto, State as CryptoListState } from 'ducks/cryptoList/types'
-import type { State as CryptoGlobalStatsState } from 'ducks/cryptoGlobalStats/types'
-import type { State as WatchlistState } from 'ducks/watchlist/types'
+import type { ReactNode } from 'react'
 
 export type Props = {
   auth: boolean,
-  watchlist: WatchlistState,
-  cryptoList: CryptoListState,
-  cryptoGlobalStats: CryptoGlobalStatsState,
-  getCryptoList: (start: number, limit: number) => void,
-  toggleWatchlist: (crypto: Crypto, action: 'ADD' | 'REMOVE') => void,
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'auto',
+  type: 'button' | 'submit' | 'reset',
+  height?: 'lg',
+  shape?: 'outline' | 'social' | 'text',
+  children?: ReactNode,
+  className?: string,
+  disabled?: boolean,
+  onClick?: () => void,
+  icon?: ReactNode,
 }

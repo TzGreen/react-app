@@ -1,14 +1,13 @@
 // @flow
 
-import type { Crypto, State as CryptoListState } from 'ducks/cryptoList/types'
-import type { State as CryptoGlobalStatsState } from 'ducks/cryptoGlobalStats/types'
-import type { State as WatchlistState } from 'ducks/watchlist/types'
+import type { Post } from 'ducks/getPosts/types'
+import type { DeletePostPayload } from 'ducks/deletePost/types'
 
 export type Props = {
-  auth: boolean,
-  watchlist: WatchlistState,
-  cryptoList: CryptoListState,
-  cryptoGlobalStats: CryptoGlobalStatsState,
-  getCryptoList: (start: number, limit: number) => void,
-  toggleWatchlist: (crypto: Crypto, action: 'ADD' | 'REMOVE') => void,
+  active: boolean,
+  post: Post,
+  userId: number,
+  className?: string,
+  onSubmit: (data: DeletePostPayload) => void,
+  onClose: () => void,
 }

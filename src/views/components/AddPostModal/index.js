@@ -48,19 +48,25 @@ const AddPostModal = ({
     >
       <form onSubmit={handleSubmit(submitHandler)}>
         <Input
-          registerProps={register('title')}
+          registerProps={register('title', {
+            required: 'Post title is required',
+          })}
           placeholder="Post title"
           id="title"
           label="Title"
           required
+          error={formState.errors?.title?.message}
         />
         <TextArea
           placeholder="Post content"
-          registerProps={register('body')}
+          registerProps={register('body', {
+            required: 'Post content is required',
+          })}
           id="body"
           label="Content"
           height="xl"
           required
+          error={formState.errors?.body?.message}
         />
         <div className="aic jcfe">
           <Button shape="outline" size="xs" onClick={onClose}>
