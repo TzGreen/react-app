@@ -4,6 +4,7 @@
   "settings": {
     "import/resolver": {
       "alias": [
+        ["app", "./src/app"],
         ["pageTypes", "./src/pageTypes"],
         ["styles", "./src/styles"],
         ["pages", "./src/pages"],
