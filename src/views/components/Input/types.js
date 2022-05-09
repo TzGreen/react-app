@@ -1,14 +1,18 @@
 // @flow
 
-import type { Crypto, State as CryptoListState } from 'ducks/cryptoList/types'
-import type { State as CryptoGlobalStatsState } from 'ducks/cryptoGlobalStats/types'
-import type { State as WatchlistState } from 'ducks/watchlist/types'
+import type { UseFormRegisterReturn } from 'react-hook-form'
 
 export type Props = {
-  auth: boolean,
-  watchlist: WatchlistState,
-  cryptoList: CryptoListState,
-  cryptoGlobalStats: CryptoGlobalStatsState,
-  getCryptoList: (start: number, limit: number) => void,
-  toggleWatchlist: (crypto: Crypto, action: 'ADD' | 'REMOVE') => void,
+  value?: string,
+  defaultValue?: string,
+  id?: string,
+  placeholder?: string,
+  label?: string,
+  labelClassName?: string,
+  required?: boolean,
+  disabled?: boolean,
+  wrapClassName?: string,
+  className?: string,
+  error?: string,
+  registerProps: UseFormRegisterReturn,
 }

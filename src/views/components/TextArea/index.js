@@ -17,7 +17,6 @@ const TextArea = ({
   wrapClassName,
   className,
   error,
-  // onChange = () => {},
   registerProps,
 }: Props) => {
   const wrapClass = classNames(wrapClassName, 'direction-column textarea-wrap')
@@ -44,7 +43,6 @@ const TextArea = ({
         defaultValue={defaultValue}
         placeholder={placeholder}
         disabled={disabled}
-        // onChange={onChange}
         className={textareaClass}
       />
       {error && <span className="textarea__error-message c3">{error}</span>}

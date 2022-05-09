@@ -2,7 +2,7 @@
 
 import React, { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Menu } from 'views/icons/Menu'
+// import { Menu } from 'views/icons/Menu'
 import { Props } from './types'
 
 const UserItem = ({ user }: Props) => {
@@ -18,7 +18,7 @@ const UserItem = ({ user }: Props) => {
       <div className="users-table__email">{user.email}</div>
       <div className="users-table__company">{user.company.name}</div>
       <div className="users-table__options centered">
-        <Menu hovered />
+        {/* <Menu hovered /> */}
       </div>
     </div>
   )

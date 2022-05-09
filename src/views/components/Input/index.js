@@ -16,7 +16,6 @@ const Input = ({
   wrapClassName,
   className,
   error,
-  // onChange = () => {},
   registerProps,
 }: Props) => {
   const wrapClass = classNames(wrapClassName, 'direction-column input-wrap')
@@ -39,7 +38,6 @@ const Input = ({
         defaultValue={defaultValue}
         placeholder={placeholder}
         disabled={disabled}
-        // onChange={onChange}
         className={inputClass}
       />
       {error && <span className="input__error-message c3">{error}</span>}
