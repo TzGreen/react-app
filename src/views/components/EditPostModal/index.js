@@ -23,6 +23,7 @@ const EditPostModal = ({
   const editPostState = useSelector(editPostStateSelector)
   const { register, handleSubmit, formState } = useForm({
     mode: 'onChange',
+    shouldUnregister: true,
   })
 
   const submitHandler = useCallback(
@@ -38,7 +39,9 @@ const EditPostModal = ({
   )
 
   const isSubmitButtonDisabled =
-    !formState.isValid || !formState.isDirty || editPostState.loading
+    !formState.isValid ||
+    (formState.dirtyFields && !Object.keys(formState.dirtyFields).length) ||
+    editPostState.loading
 
   const editPosrClassName = classNames(className, 'post-modal')
   return (

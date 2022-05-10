@@ -21,7 +21,8 @@ const AddUserModal = ({
   const addUserState = useSelector(addUserStateSelector)
   const getUsersState = useSelector(getUsersStateSelector)
   const { register, handleSubmit, formState } = useForm({
-    mode: 'onChange',
+    mode: 'onBlur',
+    shouldUnregister: true,
   })
 
   const submitHandler = useCallback(
@@ -32,7 +33,7 @@ const AddUserModal = ({
   )
 
   const isSubmitButtonDisabled =
-    !formState.isValid || !formState.isDirty || addUserState.loading
+    (!formState.isValid && formState.isSubmitted) || addUserState.loading
 
   const validateUserName = (name) => {
     if (
@@ -57,6 +58,10 @@ const AddUserModal = ({
           registerProps={register('name', {
             required: 'User name is required',
             validate: validateUserName,
+            minLength: {
+              value: 2,
+              message: 'User name must be a least 2 characters',
+            },
           })}
           placeholder="User name"
           id="name"
@@ -82,6 +87,10 @@ const AddUserModal = ({
         <Input
           registerProps={register('company', {
             required: 'User company is required',
+            minLength: {
+              value: 2,
+              message: 'Company must be a least 2 characters',
+            },
           })}
           placeholder="User company"
           id="company"

@@ -22,6 +22,7 @@ const AddPostModal = ({
   const addPostState = useSelector(addPostStateSelector)
   const { register, handleSubmit, formState } = useForm({
     mode: 'onChange',
+    shouldUnregister: true,
   })
 
   const submitHandler = useCallback(
@@ -36,7 +37,7 @@ const AddPostModal = ({
   )
 
   const isSubmitButtonDisabled =
-    !formState.isValid || !formState.isDirty || addPostState.loading
+    (!formState.isValid && formState.isSubmitted) || addPostState.loading
 
   const addPosrClassName = classNames(className, 'post-modal')
   return (
