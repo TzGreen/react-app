@@ -1,9 +1,6 @@
 // @flow
 
 import React, { useCallback, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUsersTrigger } from 'ducks/getUsers/actions'
-import { getUsersStateSelector } from 'ducks/getUsers/selectors'
 import UserItem from 'views/components/UserItem'
 import SectionLoader from 'views/sections/SectionLoader'
 import NotFoundSection from 'views/sections/NotFoundSection'
@@ -11,20 +8,20 @@ import SearchBar from 'views/components/SearchBar'
 import Button from 'views/components/Button'
 import { Plus } from 'views/icons/Plus'
 import AddUserModal from 'views/components/AddUserModal'
-import { addUserStateSelector } from 'ducks/addUser/selectors'
-import { addUserModalTrigger, addUserTrigger } from 'ducks/addUser/actions'
+import { apiURL } from 'config'
 
 const Home = () => {
-  const dispatch = useDispatch()
-  const getUsersState = useSelector(getUsersStateSelector)
-  const addUserState = useSelector(addUserStateSelector)
+  const [users, setUsers] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
   const [filteredUsers, setFilteredUsers] = useState(null)
+  const [addUserModalOpen, setAddUserModalOpen] = useState(false)
 
   const onSearch = useCallback(
     (value) => {
       const valueToSearch = value.toLowerCase()
-      if (getUsersState.data) {
-        const filteredData = getUsersState.data.filter(
+      if (users && users.length) {
+        const filteredData = users.filter(
           (user) =>
             user.name.toLowerCase().includes(valueToSearch) ||
             user.email.toLowerCase().includes(valueToSearch)
@@ -32,38 +29,44 @@ const Home = () => {
         setFilteredUsers(filteredData)
       }
     },
-    [getUsersState.data]
+    [users]
   )
 
   const openAddUserModalTrigger = useCallback(() => {
-    dispatch(addUserModalTrigger())
-  }, [dispatch])
+    setAddUserModalOpen(true)
+  }, [])
 
   const closeAddUserModalTrigger = useCallback(() => {
-    dispatch(addUserModalTrigger())
-  }, [dispatch])
+    setAddUserModalOpen(false)
+  }, [])
 
-  const addUserSubmitHandler = useCallback(
-    (data) => {
-      dispatch(addUserTrigger(data))
-    },
-    [dispatch]
-  )
+  const addUserSubmitHandler = useCallback((data) => {
+    setUsers((users) => [...users, data])
+  }, [])
 
   useEffect(() => {
-    dispatch(getUsersTrigger())
-  }, [dispatch])
+    setLoading(true)
+    fetch(`${apiURL}/users`)
+      .then((response) => response.json())
+      .then((usersList) => {
+        setUsers(usersList)
+        setLoading(false)
+      })
+      .catch(() => setError(true))
+  }, [])
 
-  if (getUsersState.loading) return <SectionLoader />
-  if (getUsersState.error || !getUsersState.data) return <NotFoundSection />
+  if (loading) return <SectionLoader />
+  if (error || (users && !users.length)) return <NotFoundSection />
 
   return (
     <>
       <AddUserModal
-        active={addUserState.isModalOpen}
+        active={addUserModalOpen}
+        usersList={users}
         onSubmit={addUserSubmitHandler}
         onClose={closeAddUserModalTrigger}
       />
+
       <div className="df">
         <SearchBar onChange={onSearch} placeholder="Search name or email..." />
         <Button
@@ -84,12 +87,13 @@ const Home = () => {
         </div>
         <div>
           {(filteredUsers &&
+            filteredUsers.length &&
             filteredUsers.map((user) => (
               <UserItem user={user} key={user.id} />
             ))) ||
-            getUsersState.data.map((user) => (
-              <UserItem user={user} key={user.id} />
-            ))}
+            (users &&
+              users.length &&
+              users.map((user) => <UserItem user={user} key={user.id} />))}
         </div>
       </section>
     </>

@@ -1,25 +1,22 @@
 // @flow
 
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import classNames from 'classnames'
-
+import { apiURL } from 'config'
 import Input from 'views/components/Input'
 import Modal from 'views/components/Modal'
-import { useSelector } from 'react-redux'
-import { useForm } from 'react-hook-form'
-import { addUserStateSelector } from 'ducks/addUser/selectors'
-import { getUsersStateSelector } from 'ducks/getUsers/selectors'
+import Button from 'views/components/Button'
 import { Props } from './types'
-import Button from '../Button'
 
 const AddUserModal = ({
   active,
+  usersList,
   className,
   onSubmit = () => {},
   onClose = () => {},
 }: Props) => {
-  const addUserState = useSelector(addUserStateSelector)
-  const getUsersState = useSelector(getUsersStateSelector)
+  const [loading, setLoading] = useState(false)
   const { register, handleSubmit, formState } = useForm({
     mode: 'onBlur',
     shouldUnregister: true,
@@ -27,18 +24,44 @@ const AddUserModal = ({
 
   const submitHandler = useCallback(
     (formData) => {
-      onSubmit(formData)
+      setLoading(true)
+      fetch(`${apiURL}/users`, {
+        method: 'POST',
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: {
+            name: formData.company,
+          },
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+        .then((response) => response.json())
+        .then((user) => {
+          onSubmit({
+            ...formData,
+            ...user,
+            company: {
+              name: formData.company,
+            },
+          })
+          setLoading(false)
+          onClose()
+        })
     },
-    [onSubmit]
+    [onSubmit, onClose]
   )
 
   const isSubmitButtonDisabled =
-    (!formState.isValid && formState.isSubmitted) || addUserState.loading
+    (!formState.isValid && formState.isSubmitted) || loading
 
   const validateUserName = (name) => {
     if (
-      getUsersState.data &&
-      getUsersState.data.some((user) => user.name === name)
+      usersList &&
+      usersList.length &&
+      usersList.some((user) => user.name === name)
     ) {
       return 'User name must be unique'
     }

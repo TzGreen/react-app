@@ -1,25 +1,23 @@
 // @flow
 
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import classNames from 'classnames'
-
+import { apiURL } from 'config'
 import Input from 'views/components/Input'
 import Modal from 'views/components/Modal'
-import { useSelector } from 'react-redux'
-import { addPostStateSelector } from 'ducks/addPost/selectors'
-import { useForm } from 'react-hook-form'
+import TextArea from 'views/components/TextArea'
+import Button from 'views/components/Button'
 import { Props } from './types'
-import TextArea from '../TextArea'
-import Button from '../Button'
 
 const AddPostModal = ({
   active,
-  userId,
   className,
+  userId,
   onSubmit = () => {},
   onClose = () => {},
 }: Props) => {
-  const addPostState = useSelector(addPostStateSelector)
+  const [loading, setLoading] = useState(false)
   const { register, handleSubmit, formState } = useForm({
     mode: 'onChange',
     shouldUnregister: true,
@@ -27,17 +25,33 @@ const AddPostModal = ({
 
   const submitHandler = useCallback(
     (formData) => {
-      const data = {
-        ...formData,
-        userId,
-      }
-      onSubmit(data)
+      setLoading(true)
+      fetch(`${apiURL}/posts`, {
+        method: 'POST',
+        body: JSON.stringify({
+          title: formData.title,
+          body: formData.body,
+          userId,
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+        .then((response) => response.json())
+        .then((post) => {
+          onSubmit({
+            ...formData,
+            ...post,
+          })
+          setLoading(false)
+          onClose()
+        })
     },
-    [onSubmit, userId]
+    [onSubmit, onClose, userId]
   )
 
   const isSubmitButtonDisabled =
-    (!formState.isValid && formState.isSubmitted) || addPostState.loading
+    (!formState.isValid && formState.isSubmitted) || loading
 
   const addPosrClassName = classNames(className, 'post-modal')
   return (

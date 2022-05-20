@@ -1,16 +1,14 @@
 // @flow
 
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import classNames from 'classnames'
-
+import { apiURL } from 'config'
 import Input from 'views/components/Input'
 import Modal from 'views/components/Modal'
-import { useSelector } from 'react-redux'
-import { editPostStateSelector } from 'ducks/editPost/selectors'
-import { useForm } from 'react-hook-form'
+import TextArea from 'views/components/TextArea'
+import Button from 'views/components/Button'
 import { Props } from './types'
-import TextArea from '../TextArea'
-import Button from '../Button'
 
 const EditPostModal = ({
   active,
@@ -20,7 +18,7 @@ const EditPostModal = ({
   onSubmit = () => {},
   onClose = () => {},
 }: Props) => {
-  const editPostState = useSelector(editPostStateSelector)
+  const [loading, setLoading] = useState(false)
   const { register, handleSubmit, formState } = useForm({
     mode: 'onChange',
     shouldUnregister: true,
@@ -28,20 +26,36 @@ const EditPostModal = ({
 
   const submitHandler = useCallback(
     (formData) => {
-      const data = {
-        ...post,
-        ...formData,
-        userId,
-      }
-      onSubmit(data)
+      setLoading(true)
+      fetch(`${apiURL}/posts/${post.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          id: post.id,
+          title: formData.title || post.title,
+          body: formData.body || post.body,
+          userId,
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+        .then((response) => response.json())
+        .then((post) => {
+          onSubmit({
+            ...formData,
+            ...post,
+          })
+          setLoading(false)
+          onClose()
+        })
     },
-    [onSubmit, userId, post]
+    [onSubmit, onClose, post, userId]
   )
 
   const isSubmitButtonDisabled =
     !formState.isValid ||
     (formState.dirtyFields && !Object.keys(formState.dirtyFields).length) ||
-    editPostState.loading
+    loading
 
   const editPosrClassName = classNames(className, 'post-modal')
   return (

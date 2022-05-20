@@ -1,37 +1,38 @@
 // @flow
 
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import classNames from 'classnames'
+import { apiURL } from 'config'
 import Modal from 'views/components/Modal'
-import { useSelector } from 'react-redux'
-import { deletePostStateSelector } from 'ducks/deletePost/selectors'
+import Button from 'views/components/Button'
 import { Props } from './types'
-import Button from '../Button'
 
 const DeletePostModal = ({
   active,
   post,
-  userId,
   className,
   onSubmit = () => {},
   onClose = () => {},
 }: Props) => {
-  const deletePostState = useSelector(deletePostStateSelector)
+  const [loading, setLoading] = useState(false)
 
   const submitHandler = useCallback(() => {
-    const data = {
-      ...post,
-      userId,
-    }
-    onSubmit(data)
-  }, [onSubmit, userId, post])
+    setLoading(true)
+    fetch(`${apiURL}/posts/${post.id}`, {
+      method: 'DELETE',
+    }).then(() => {
+      setLoading(false)
+      onClose()
+      onSubmit(post.id)
+    })
+  }, [onSubmit, onClose, post.id])
 
   const editPosrClassName = classNames(className, 'post-modal')
   return (
     <Modal active={active} onClose={onClose} className={editPosrClassName}>
       <div className="h3 text-medium text-center bottom-16">
         Are you sure you want to delete post&nbsp;
-        <sapn className="h4">&quot;{post.title}&quot;</sapn>
+        <span className="h4">&quot;{post.title}&quot;</span>
         &nbsp;?
       </div>
       <span className="c1 text-center bottom-30">
@@ -44,7 +45,7 @@ const DeletePostModal = ({
         <Button
           type="submit"
           onClick={submitHandler}
-          disabled={deletePostState.loading}
+          disabled={loading}
           className="post-modal__submit-btn"
         >
           Delete post
