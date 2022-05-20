@@ -87,7 +87,6 @@ const Home = () => {
         </div>
         <div>
           {(filteredUsers &&
-            filteredUsers.length &&
             filteredUsers.map((user) => (
               <UserItem user={user} key={user.id} />
             ))) ||
