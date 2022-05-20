@@ -1,35 +1,14 @@
 // @flow
 
-import Amplify, { API } from 'aws-amplify'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { apiName, apiURL } from 'config'
-import { configureStore } from './redux/store'
 import Root from './app/Root'
 import './styles/main.scss'
 import * as serviceWorker from './serviceWorker'
 
-Amplify.configure({
-  Auth: null,
-  API: {
-    endpoints: [
-      {
-        name: apiName,
-        endpoint: apiURL,
-      },
-    ],
-  },
-})
-API.configure()
-
-const store = configureStore()
-
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Root />
-    </Provider>
+    <Root />
   </React.StrictMode>,
   document.getElementById('root')
 )
